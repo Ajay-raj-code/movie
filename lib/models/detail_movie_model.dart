@@ -1,11 +1,11 @@
+/// this model file is for containing all the attributes of movies
+/// it is for large description
+
 class RatingModel {
   final String source;
   final String value;
 
-  RatingModel({
-    required this.source,
-    required this.value,
-  });
+  RatingModel({required this.source, required this.value});
 
   factory RatingModel.fromJson(Map<String, dynamic> json) {
     return RatingModel(
@@ -15,10 +15,7 @@ class RatingModel {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      'Source': source,
-      'Value': value,
-    };
+    return {'Source': source, 'Value': value};
   }
 }
 
@@ -28,10 +25,10 @@ class DetailMovieModel {
   final String rated;
   final String released;
   final String runtime;
-  final String genre;
+  final List<String> genre;
   final String director;
   final String writer;
-  final String actors;
+  final List<String> actors;
   final String plot;
   final String language;
   final String country;
@@ -84,18 +81,23 @@ class DetailMovieModel {
       rated: json['Rated'] ?? '',
       released: json['Released'] ?? '',
       runtime: json['Runtime'] ?? '',
-      genre: json['Genre'] ?? '',
+      genre: json['Genre'] != null
+          ? (json['Genre'] as String).split(',').map((e) => e.trim()).toList()
+          : [],
       director: json['Director'] ?? '',
       writer: json['Writer'] ?? '',
-      actors: json['Actors'] ?? '',
+      actors: json['Actors'] != null
+          ? (json['Actors'] as String).split(',').map((e) => e.trim()).toList()
+          : [],
       plot: json['Plot'] ?? '',
       language: json['Language'] ?? '',
       country: json['Country'] ?? '',
       awards: json['Awards'] ?? '',
       poster: json['Poster'] ?? '',
-      ratings: (json['Ratings'] as List<dynamic>?)
-          ?.map((e) => RatingModel.fromJson(e))
-          .toList() ??
+      ratings:
+          (json['Ratings'] as List<dynamic>?)
+              ?.map((e) => RatingModel.fromJson(e))
+              .toList() ??
           [],
       metascore: json['Metascore'] ?? '',
       imdbRating: json['imdbRating'] ?? '',
