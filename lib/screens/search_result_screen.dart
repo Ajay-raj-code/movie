@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie/controllers/search_controller.dart';
+import 'package:movie/utils/routes.dart';
 import 'package:movie/utils/themes/app_colors.dart';
 import 'package:movie/utils/widgets/search_text_field.dart';
 
@@ -41,7 +42,7 @@ class SearchResultScreen extends StatelessWidget{
             Expanded(child: Obx(() => GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, crossAxisSpacing: 20, mainAxisSpacing:20,childAspectRatio:0.5), itemCount: _searchController.movies.length,itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-
+                    Get.toNamed(Routes.movieDetails, arguments: {"id": _searchController.movies[index].imdbId});
                 },
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie/utils/routes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
